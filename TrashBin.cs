@@ -25,6 +25,8 @@ public partial class TrashBin : Area2D
 					score++;
 					scoreSound.Play();
 				}
+				TrashSpawner.trashCount = Mathf.Max(0, TrashSpawner.trashCount - 1);
+
 				body.QueueFree();
 			}
 		}

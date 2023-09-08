@@ -376,7 +376,7 @@ scale = Vector2(0.372386, 0.515674)
 texture = ExtResource("1_rg6no")
 
 [node name="OneWayPlatform2" type="StaticBody2D" parent="."]
-position = Vector2(3052, 304)
+position = Vector2(3112, 376)
 scale = Vector2(3.289, 0.293)
 collision_mask = 13
 
@@ -495,6 +495,22 @@ scale = Vector2(6.22, 6.22)
 shape = SubResource("RectangleShape2D_6o824")
 
 [node name="Platform" type="Sprite2D" parent="Platform4"]
+position = Vector2(5.19624, 139.551)
+scale = Vector2(0.372386, 0.515674)
+texture = ExtResource("1_rg6no")
+
+[node name="OneWayPlatform3" type="StaticBody2D" parent="."]
+position = Vector2(4936, 304)
+scale = Vector2(3.289, 0.293)
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneWayPlatform3"]
+position = Vector2(6.46868, 126.409)
+scale = Vector2(6.22, 6.22)
+shape = SubResource("RectangleShape2D_6o824")
+one_way_collision = true
+
+[node name="Platform" type="Sprite2D" parent="OneWayPlatform3"]
 position = Vector2(5.19624, 139.551)
 scale = Vector2(0.372386, 0.515674)
 texture = ExtResource("1_rg6no")

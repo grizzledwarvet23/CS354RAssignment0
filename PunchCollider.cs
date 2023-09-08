@@ -38,7 +38,7 @@ public partial class PunchCollider : Area2D
 					float enemyYSpeed = Math.Abs(enemy.LinearVelocity.Y);
 					if(direction.Y > 0 && enemyYSpeed < 0.3f) {
 						if(direction.Y > 0.05) {
-							direction = new Vector2(direction.X * 2	, -direction.Y);
+							direction = new Vector2(direction.X * 2	, -direction.Y * 1.5f);
 						} else {
 							direction = new Vector2(direction.X, 0);
 						}
@@ -46,7 +46,7 @@ public partial class PunchCollider : Area2D
 					//GD.Print(direction * 500);
 					//set enemy velocity to its current self but reduce greatly
 					enemy.LinearVelocity = enemy.LinearVelocity / 2;
-					enemy.ApplyCentralImpulse(direction * 700);
+					enemy.ApplyCentralImpulse(direction * 600);
 					SetPunching();
 					
 
