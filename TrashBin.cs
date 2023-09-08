@@ -4,6 +4,9 @@ using System;
 public partial class TrashBin : Area2D
 {
 	public static int score = 0;
+
+	[Export]
+	public string color;
 	public AudioStreamPlayer2D scoreSound;
 
 	//ready
@@ -18,8 +21,10 @@ public partial class TrashBin : Area2D
 			if (name.Contains("Trash")) {
 				//delete the trash
 				//GD.Print("hey");
-				score++;
-				scoreSound.Play();
+				if(name.Contains(color)) {
+					score++;
+					scoreSound.Play();
+				}
 				body.QueueFree();
 			}
 		}
