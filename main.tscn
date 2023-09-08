@@ -410,6 +410,7 @@ texture = ExtResource("1_rg6no")
 position = Vector2(0, 167)
 scale = Vector2(7, 4.88)
 script = ExtResource("8_pjjqy")
+color = "Red"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bin1"]
 position = Vector2(203.714, 218.75)
@@ -433,6 +434,7 @@ texture = SubResource("ViewportTexture_xuj22")
 position = Vector2(1686, 167)
 scale = Vector2(7, 4.88)
 script = ExtResource("8_pjjqy")
+color = "Blue"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bin2"]
 position = Vector2(203.714, 218.75)
@@ -456,6 +458,7 @@ texture = SubResource("ViewportTexture_xuj22")
 position = Vector2(3488, 151)
 scale = Vector2(7, 4.88)
 script = ExtResource("8_pjjqy")
+color = "Green"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bin3"]
 position = Vector2(206.836, 222.131)

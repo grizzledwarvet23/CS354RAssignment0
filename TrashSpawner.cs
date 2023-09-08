@@ -6,13 +6,32 @@ public partial class TrashSpawner : Node2D
 
 	[Export]
 	private PackedScene prefabScene;
+	
+	private bool canSpawn = true;
 
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		prefabScene = ResourceLoader.Load<PackedScene>("res://trash.tscn");
-		SpawnObject();
+		//SpawnObject();
+	}
+
+	//process. spawn object every 2 seconds
+	public override void _Process(float delta) {
+		//GD.Print(TrashBin.score);
+		if(canSpawn) {
+			canSpawn = false;
+			SpawnObject();
+			SetCanSpawn();
+
+		}
+	}
+
+	//async function SetCanSpawn that sets it to true after x seconds
+	public async void SetCanSpawn() {
+		await ToSignal(GetTree().CreateTimer(1), "timeout");
+		canSpawn = true;
 	}
 
 	public void SpawnObject() {
