@@ -1,0 +1,497 @@
+[gd_scene load_steps=17 format=3 uid="uid://dy4x6uxl8lf57"]
+
+[ext_resource type="Texture2D" uid="uid://85pwvdeeoyj2" path="res://platform1.png" id="1_rg6no"]
+[ext_resource type="Script" path="res://CharacterBody2D.cs" id="2_mxam3"]
+[ext_resource type="Script" path="res://PunchCollider.cs" id="3_564ig"]
+[ext_resource type="Texture2D" uid="uid://cc34dwi4ttqb5" path="res://trashman.png" id="3_yxn6d"]
+[ext_resource type="Texture2D" uid="uid://0oo4xbsbr3bw" path="res://brawlhalla.jpg" id="5_b6qdf"]
+[ext_resource type="Texture2D" uid="uid://dosqc1ewk17b7" path="res://hand.png" id="5_t0s18"]
+[ext_resource type="AudioStream" uid="uid://dd3j2nocmnh0w" path="res://whoosh.mp3" id="6_ss6gg"]
+[ext_resource type="Script" path="res://TrashBin.cs" id="8_pjjqy"]
+[ext_resource type="Script" path="res://UpdateScore.cs" id="9_l88me"]
+[ext_resource type="AudioStream" uid="uid://6gc4wg6xpsyh" path="res://flappy_bird.mp3" id="11_bsh1s"]
+[ext_resource type="Script" path="res://TrashSpawner.cs" id="12_2qtix"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6o824"]
+size = Vector2(23.2258, 24.0513)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fdhvk"]
+radius = 279.71
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5fqy"]
+size = Vector2(181, 182)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51mk3"]
+size = Vector2(143.429, 43.2377)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xuj22"]
+viewport_path = NodePath("Bin1/ColorTint/SubViewport")
+
+[node name="World" type="Node2D"]
+position = Vector2(-1, 0)
+
+[node name="Platform" type="StaticBody2D" parent="."]
+position = Vector2(593, 492)
+scale = Vector2(6.73438, 3.14844)
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2(6.46868, 126.409)
+scale = Vector2(6.22, 6.22)
+shape = SubResource("RectangleShape2D_6o824")
+
+[node name="Platform" type="Sprite2D" parent="Platform"]
+position = Vector2(5.19624, 139.551)
+scale = Vector2(0.372386, 0.515674)
+texture = ExtResource("1_rg6no")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(402, 229)
+script = ExtResource("2_mxam3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(8.92, -31.08)
+scale = Vector2(1.39, 1.39)
+texture = ExtResource("3_yxn6d")
+flip_h = true
+
+[node name="SubViewport" type="SubViewport" parent="Player/Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(0.283997, -2.32498)
+scale = Vector2(0.475, 0.475)
+shape = SubResource("CircleShape2D_fdhvk")
+debug_color = Color(0, 0.6, 0.701961, 0.368627)
+
+[node name="Puncher (Area2D)" type="Area2D" parent="Player" node_paths=PackedStringArray("characterBody")]
+position = Vector2(0.679947, 2.77998)
+scale = Vector2(0.86, 0.86)
+collision_layer = 12
+collision_mask = 12
+script = ExtResource("3_564ig")
+characterBody = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Puncher (Area2D)"]
+position = Vector2(0, -9)
+scale = Vector2(1.505, 0.29)
+shape = SubResource("RectangleShape2D_h5fqy")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Puncher (Area2D)"]
+position = Vector2(5.5, 10)
+scale = Vector2(1.21484, 1)
+texture = ExtResource("5_t0s18")
+
+[node name="SubViewport" type="SubViewport" parent="Player/Puncher (Area2D)/Sprite2D"]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(171, 174)
+zoom = Vector2(0.7, 0.7)
+limit_left = -110
+limit_top = -200
+limit_right = 5000
+limit_bottom = 630
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+drag_vertical_offset = 0.95
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("6_ss6gg")
+
+[node name="Backgrounds" type="Node2D" parent="."]
+position = Vector2(-917, -1509)
+scale = Vector2(1.5, 1.5)
+
+[node name="Group1" type="Node2D" parent="Backgrounds"]
+
+[node name="Brawlhalla" type="Sprite2D" parent="Backgrounds/Group1"]
+z_index = -1
+position = Vector2(582, 295)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla2" type="Sprite2D" parent="Backgrounds/Group1"]
+z_index = -1
+position = Vector2(1431, 295)
+rotation = -3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla3" type="Sprite2D" parent="Backgrounds/Group1"]
+z_index = -1
+position = Vector2(2273, 295)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla4" type="Sprite2D" parent="Backgrounds/Group1"]
+z_index = -1
+position = Vector2(582, 772.48)
+texture = ExtResource("5_b6qdf")
+flip_v = true
+
+[node name="Brawlhalla5" type="Sprite2D" parent="Backgrounds/Group1"]
+z_index = -1
+position = Vector2(1431, 772.48)
+rotation = -3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("5_b6qdf")
+flip_v = true
+
+[node name="Brawlhalla6" type="Sprite2D" parent="Backgrounds/Group1"]
+z_index = -1
+position = Vector2(2273, 772.48)
+texture = ExtResource("5_b6qdf")
+flip_v = true
+
+[node name="Brawlhalla7" type="Sprite2D" parent="Backgrounds/Group1"]
+z_index = -1
+position = Vector2(581.667, 1250.33)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla8" type="Sprite2D" parent="Backgrounds/Group1"]
+z_index = -1
+position = Vector2(1430.67, 1250.33)
+rotation = -3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla9" type="Sprite2D" parent="Backgrounds/Group1"]
+z_index = -1
+position = Vector2(2272.67, 1250.33)
+texture = ExtResource("5_b6qdf")
+
+[node name="Group2" type="Node2D" parent="Backgrounds"]
+position = Vector2(5394.67, 0)
+scale = Vector2(-1, 1)
+
+[node name="Brawlhalla" type="Sprite2D" parent="Backgrounds/Group2"]
+z_index = -1
+position = Vector2(582, 295)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla2" type="Sprite2D" parent="Backgrounds/Group2"]
+z_index = -1
+position = Vector2(1431, 295)
+rotation = -3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla3" type="Sprite2D" parent="Backgrounds/Group2"]
+z_index = -1
+position = Vector2(2273, 295)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla4" type="Sprite2D" parent="Backgrounds/Group2"]
+z_index = -1
+position = Vector2(582, 772.48)
+texture = ExtResource("5_b6qdf")
+flip_v = true
+
+[node name="Brawlhalla5" type="Sprite2D" parent="Backgrounds/Group2"]
+z_index = -1
+position = Vector2(1431, 772.48)
+rotation = -3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("5_b6qdf")
+flip_v = true
+
+[node name="Brawlhalla6" type="Sprite2D" parent="Backgrounds/Group2"]
+z_index = -1
+position = Vector2(2273, 772.48)
+texture = ExtResource("5_b6qdf")
+flip_v = true
+
+[node name="Brawlhalla7" type="Sprite2D" parent="Backgrounds/Group2"]
+z_index = -1
+position = Vector2(581.667, 1250.33)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla8" type="Sprite2D" parent="Backgrounds/Group2"]
+z_index = -1
+position = Vector2(1430.67, 1250.33)
+rotation = -3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla9" type="Sprite2D" parent="Backgrounds/Group2"]
+z_index = -1
+position = Vector2(2272.67, 1250.33)
+texture = ExtResource("5_b6qdf")
+
+[node name="Group3" type="Node2D" parent="Backgrounds"]
+position = Vector2(0, 2976.67)
+scale = Vector2(1, -1)
+
+[node name="Brawlhalla" type="Sprite2D" parent="Backgrounds/Group3"]
+z_index = -1
+position = Vector2(582, 295)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla2" type="Sprite2D" parent="Backgrounds/Group3"]
+z_index = -1
+position = Vector2(1431, 295)
+rotation = -3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla3" type="Sprite2D" parent="Backgrounds/Group3"]
+z_index = -1
+position = Vector2(2273, 295)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla4" type="Sprite2D" parent="Backgrounds/Group3"]
+z_index = -1
+position = Vector2(582, 772.48)
+texture = ExtResource("5_b6qdf")
+flip_v = true
+
+[node name="Brawlhalla5" type="Sprite2D" parent="Backgrounds/Group3"]
+z_index = -1
+position = Vector2(1431, 772.48)
+rotation = -3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("5_b6qdf")
+flip_v = true
+
+[node name="Brawlhalla6" type="Sprite2D" parent="Backgrounds/Group3"]
+z_index = -1
+position = Vector2(2273, 772.48)
+texture = ExtResource("5_b6qdf")
+flip_v = true
+
+[node name="Brawlhalla7" type="Sprite2D" parent="Backgrounds/Group3"]
+z_index = -1
+position = Vector2(581.667, 1250.33)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla8" type="Sprite2D" parent="Backgrounds/Group3"]
+z_index = -1
+position = Vector2(1430.67, 1250.33)
+rotation = -3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla9" type="Sprite2D" parent="Backgrounds/Group3"]
+z_index = -1
+position = Vector2(2272.67, 1250.33)
+texture = ExtResource("5_b6qdf")
+
+[node name="Group4" type="Node2D" parent="Backgrounds"]
+position = Vector2(5394.67, 2976.67)
+scale = Vector2(-1, -1)
+
+[node name="Brawlhalla" type="Sprite2D" parent="Backgrounds/Group4"]
+z_index = -1
+position = Vector2(582, 295)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla2" type="Sprite2D" parent="Backgrounds/Group4"]
+z_index = -1
+position = Vector2(1431, 295)
+rotation = -3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla3" type="Sprite2D" parent="Backgrounds/Group4"]
+z_index = -1
+position = Vector2(2273, 295)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla4" type="Sprite2D" parent="Backgrounds/Group4"]
+z_index = -1
+position = Vector2(582, 772.48)
+texture = ExtResource("5_b6qdf")
+flip_v = true
+
+[node name="Brawlhalla5" type="Sprite2D" parent="Backgrounds/Group4"]
+z_index = -1
+position = Vector2(1431, 772.48)
+rotation = -3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("5_b6qdf")
+flip_v = true
+
+[node name="Brawlhalla6" type="Sprite2D" parent="Backgrounds/Group4"]
+z_index = -1
+position = Vector2(2273, 772.48)
+texture = ExtResource("5_b6qdf")
+flip_v = true
+
+[node name="Brawlhalla7" type="Sprite2D" parent="Backgrounds/Group4"]
+z_index = -1
+position = Vector2(581.667, 1250.33)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla8" type="Sprite2D" parent="Backgrounds/Group4"]
+z_index = -1
+position = Vector2(1430.67, 1250.33)
+rotation = -3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("5_b6qdf")
+
+[node name="Brawlhalla9" type="Sprite2D" parent="Backgrounds/Group4"]
+z_index = -1
+position = Vector2(2272.67, 1250.33)
+texture = ExtResource("5_b6qdf")
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+position = Vector2(2154, 492)
+scale = Vector2(6.73438, 3.14844)
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
+position = Vector2(6.46868, 126.409)
+scale = Vector2(6.22, 6.22)
+shape = SubResource("RectangleShape2D_6o824")
+
+[node name="Platform" type="Sprite2D" parent="Platform2"]
+position = Vector2(5.19624, 139.551)
+scale = Vector2(0.372386, 0.515674)
+texture = ExtResource("1_rg6no")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+modulate = Color(0, 0, 0, 1)
+offset_left = 1652.0
+offset_right = 1834.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 41
+text = "Score: 0"
+horizontal_alignment = 2
+script = ExtResource("9_l88me")
+
+[node name="OneWayPlatform" type="StaticBody2D" parent="."]
+position = Vector2(1355, 304)
+scale = Vector2(3.289, 0.293)
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneWayPlatform"]
+position = Vector2(6.46868, 126.409)
+scale = Vector2(6.22, 6.22)
+shape = SubResource("RectangleShape2D_6o824")
+one_way_collision = true
+
+[node name="Platform" type="Sprite2D" parent="OneWayPlatform"]
+position = Vector2(5.19624, 139.551)
+scale = Vector2(0.372386, 0.515674)
+texture = ExtResource("1_rg6no")
+
+[node name="OneWayPlatform2" type="StaticBody2D" parent="."]
+position = Vector2(3052, 304)
+scale = Vector2(3.289, 0.293)
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneWayPlatform2"]
+position = Vector2(6.46868, 126.409)
+scale = Vector2(6.22, 6.22)
+shape = SubResource("RectangleShape2D_6o824")
+one_way_collision = true
+
+[node name="Platform" type="Sprite2D" parent="OneWayPlatform2"]
+position = Vector2(5.19624, 139.551)
+scale = Vector2(0.372386, 0.515674)
+texture = ExtResource("1_rg6no")
+
+[node name="Platform3" type="StaticBody2D" parent="."]
+position = Vector2(3961, 492)
+scale = Vector2(6.73438, 3.14844)
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
+position = Vector2(6.46868, 126.409)
+scale = Vector2(6.22, 6.22)
+shape = SubResource("RectangleShape2D_6o824")
+
+[node name="Platform" type="Sprite2D" parent="Platform3"]
+position = Vector2(5.19624, 139.551)
+scale = Vector2(0.372386, 0.515674)
+texture = ExtResource("1_rg6no")
+
+[node name="Bin1" type="Area2D" parent="."]
+position = Vector2(0, 167)
+scale = Vector2(7, 4.88)
+script = ExtResource("8_pjjqy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bin1"]
+position = Vector2(203.714, 218.75)
+shape = SubResource("RectangleShape2D_51mk3")
+
+[node name="ScoreSound" type="AudioStreamPlayer2D" parent="Bin1"]
+position = Vector2(0, -34.2213)
+scale = Vector2(0.142857, 0.204918)
+stream = ExtResource("11_bsh1s")
+
+[node name="ColorTint" type="Sprite2D" parent="Bin1"]
+modulate = Color(0.905882, 0, 0, 0.654902)
+z_index = -1
+position = Vector2(205.929, 155.943)
+scale = Vector2(0.326172, 0.184907)
+texture = SubResource("ViewportTexture_xuj22")
+
+[node name="SubViewport" type="SubViewport" parent="Bin1/ColorTint"]
+
+[node name="Bin2" type="Area2D" parent="."]
+position = Vector2(1686, 167)
+scale = Vector2(7, 4.88)
+script = ExtResource("8_pjjqy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bin2"]
+position = Vector2(203.714, 218.75)
+shape = SubResource("RectangleShape2D_51mk3")
+
+[node name="ScoreSound" type="AudioStreamPlayer2D" parent="Bin2"]
+position = Vector2(0, -34.2213)
+scale = Vector2(0.142857, 0.204918)
+stream = ExtResource("11_bsh1s")
+
+[node name="ColorTint" type="Sprite2D" parent="Bin2"]
+modulate = Color(0, 0, 1, 0.654902)
+z_index = -1
+position = Vector2(205.929, 155.943)
+scale = Vector2(0.326172, 0.184907)
+texture = SubResource("ViewportTexture_xuj22")
+
+[node name="SubViewport" type="SubViewport" parent="Bin2/ColorTint"]
+
+[node name="Bin3" type="Area2D" parent="."]
+position = Vector2(3488, 151)
+scale = Vector2(7, 4.88)
+script = ExtResource("8_pjjqy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bin3"]
+position = Vector2(206.836, 222.131)
+scale = Vector2(1.13, 1)
+shape = SubResource("RectangleShape2D_51mk3")
+
+[node name="ScoreSound" type="AudioStreamPlayer2D" parent="Bin3"]
+position = Vector2(0, -34.2213)
+scale = Vector2(0.142857, 0.204918)
+stream = ExtResource("11_bsh1s")
+
+[node name="ColorTint" type="Sprite2D" parent="Bin3"]
+modulate = Color(0, 1, 0, 0.654902)
+z_index = -1
+position = Vector2(205.929, 155.943)
+scale = Vector2(0.326172, 0.184907)
+texture = SubResource("ViewportTexture_xuj22")
+
+[node name="SubViewport" type="SubViewport" parent="Bin3/ColorTint"]
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("12_2qtix")
+
+[node name="Timer" type="Timer" parent="Node2D"]
+
+[node name="Platform4" type="StaticBody2D" parent="."]
+position = Vector2(5831, 515)
+scale = Vector2(6.73438, 3.14844)
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform4"]
+position = Vector2(6.46868, 126.409)
+scale = Vector2(6.22, 6.22)
+shape = SubResource("RectangleShape2D_6o824")
+
+[node name="Platform" type="Sprite2D" parent="Platform4"]
+position = Vector2(5.19624, 139.551)
+scale = Vector2(0.372386, 0.515674)
+texture = ExtResource("1_rg6no")

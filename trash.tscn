@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dans6hrpy71hb"]
+
+[ext_resource type="Texture2D" uid="uid://deteslpc7ceyb" path="res://trashbag.png" id="1_dw6q8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nuf6l"]
+size = Vector2(139, 120)
+
+[node name="Trash" type="RigidBody2D"]
+position = Vector2(760, 385)
+collision_layer = 13
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(96.5, -81)
+shape = SubResource("RectangleShape2D_nuf6l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(99.5, -109.5)
+scale = Vector2(0.871094, 0.847656)
+texture = ExtResource("1_dw6q8")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite2D"]

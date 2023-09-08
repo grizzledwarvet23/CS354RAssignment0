@@ -1,0 +1,17 @@
+SubViewport
+Sprite2D
+AudioStreamPlayer2D
+Timer
+Node2D
+Control
+CollisionShape2D
+Area2D
+DirectionalLight2D
+PointLight2D
+CanvasLayer
+Label
+Camera2D
+Node
+RigidBody2D
+CharacterBody2D
+StaticBody2D

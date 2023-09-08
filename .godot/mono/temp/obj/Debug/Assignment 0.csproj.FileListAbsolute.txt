@@ -1,0 +1,17 @@
+C:\Users\zayaa\GodotGames\Assignment0\.godot\mono\temp\obj\Debug\Assignment 0.csproj.AssemblyReference.cache
+C:\Users\zayaa\GodotGames\Assignment0\.godot\mono\temp\obj\Debug\Assignment 0.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\zayaa\GodotGames\Assignment0\.godot\mono\temp\obj\Debug\Assignment 0.AssemblyInfoInputs.cache
+C:\Users\zayaa\GodotGames\Assignment0\.godot\mono\temp\obj\Debug\Assignment 0.AssemblyInfo.cs
+C:\Users\zayaa\GodotGames\Assignment0\.godot\mono\temp\obj\Debug\Assignment 0.csproj.CoreCompileInputs.cache
+C:\Users\zayaa\GodotGames\Assignment0\.godot\mono\temp\bin\Debug\Assignment 0.deps.json
+C:\Users\zayaa\GodotGames\Assignment0\.godot\mono\temp\bin\Debug\Assignment 0.runtimeconfig.json
+C:\Users\zayaa\GodotGames\Assignment0\.godot\mono\temp\bin\Debug\Assignment 0.dll
+C:\Users\zayaa\GodotGames\Assignment0\.godot\mono\temp\bin\Debug\Assignment 0.pdb
+C:\Users\zayaa\GodotGames\Assignment0\.godot\mono\temp\bin\Debug\GodotSharp.dll
+C:\Users\zayaa\GodotGames\Assignment0\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+C:\Users\zayaa\GodotGames\Assignment0\.godot\mono\temp\obj\Debug\Assignment 0.csproj.CopyComplete
+C:\Users\zayaa\GodotGames\Assignment0\.godot\mono\temp\obj\Debug\Assignment 0.dll
+C:\Users\zayaa\GodotGames\Assignment0\.godot\mono\temp\obj\Debug\refint\Assignment 0.dll
+C:\Users\zayaa\GodotGames\Assignment0\.godot\mono\temp\obj\Debug\Assignment 0.pdb
+C:\Users\zayaa\GodotGames\Assignment0\.godot\mono\temp\obj\Debug\Assignment 0.genruntimeconfig.cache
+C:\Users\zayaa\GodotGames\Assignment0\.godot\mono\temp\obj\Debug\ref\Assignment 0.dll

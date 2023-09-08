@@ -1,0 +1,9 @@
+res://main.tscn
+res://PlayerScript.gd
+res://CharacterBody2D.cs
+res://PunchCollider.cs
+res://TrashBin.cs
+res://UpdateScore.cs
+res://MainMenu.tscn
+res://TrashSpawner.cs
+res://trash.tscn
