@@ -52,7 +52,7 @@ public partial class TrashSpawner : Node2D
 					//hi
 				}
 				//prefabInstance.Name = "Trash instance " + i;d
-				//YOss
+				//YOsss
 			}
         }
         else
