@@ -21,6 +21,13 @@ public partial class CharacterBody2D : Godot.CharacterBody2D
 	private bool facingRight;
 
 	private AudioStreamPlayer2D hitSound;
+
+	private float yDeathLevel = 1370;
+
+	//create animation player variable:
+	private AnimationPlayer animationPlayer;
+
+
 	
 	public override void _Ready() {
 		punching = false;
@@ -29,6 +36,11 @@ public partial class CharacterBody2D : Godot.CharacterBody2D
 		armSprite = arm.GetNode<Sprite2D>("Sprite2D");
 		GD.Print(armSprite);
 		hitSound = GetNode<AudioStreamPlayer2D>("HitSound");
+		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		animationPlayer.Play("Player");
+		TrashBin.score = 0;
+		Singleton.score = 0;
+		//SetIdleSprite();
 		//armPositionX = arm.GlobalPosition.X;
 	}
 	
@@ -37,6 +49,10 @@ public partial class CharacterBody2D : Godot.CharacterBody2D
 			arm.GlobalPosition = new Vector2(arm.GlobalPosition.X, GlobalPosition.Y + 0);
 		}
 	}
+
+	//create a function that sets the sprite of this to an idle one, waits 0.5 seconds, sets to another one, waits 0.5 seconds, and calls itself
+	
+	
 	
 	
 
@@ -77,6 +93,35 @@ public partial class CharacterBody2D : Godot.CharacterBody2D
 
 		Velocity = velocity;
 		MoveAndSlide();
+
+		if(GlobalPosition.Y > yDeathLevel) {
+			//give data to game over scene
+			// var gameOverScene = (PackedScene)ResourceLoader.Load("res://GameOver.tscn");
+			// var gameOverSceneInstance = (Node2D)gameOverScene.Instance();
+			// gameOverSceneInstance.Set("score", TrashBin.score);
+			// GetTree().Root.AddChild(gameOverSceneInstance);
+			// GetTree().Paused = true
+
+			//in the scene game over, it has a script MainMenu attatched to the Node2D called GameOver. That script has a variable called score. please print it out
+			
+
+
+			GetTree().ChangeSceneToFile("res://GameOver.tscn"); //GAME OVER!
+			Singleton.score = TrashBin.score;
+			//get node GameOver and print name out
+			
+
+		}
+
+		//limit velocity not to be game breaking
+		if(Mathf.Abs(Velocity.X) > 5000) {
+			Velocity = new Vector2(Mathf.Sign(Velocity.X) * 5000, Velocity.Y);
+		}
+		//now for y
+		if(Mathf.Abs(Velocity.Y) > 5000) {
+			Velocity = new Vector2(Velocity.X, Mathf.Sign(Velocity.Y) * 5000);
+		}
+
 
 	
 	}

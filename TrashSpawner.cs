@@ -18,6 +18,7 @@ public partial class TrashSpawner : Node2D
 	public override void _Ready()
 	{
 		prefabScene = ResourceLoader.Load<PackedScene>("res://trash.tscn");
+		trashCount = 0;
 		//SpawnObject();
 	}
 
@@ -33,7 +34,7 @@ public partial class TrashSpawner : Node2D
 
 	//async function SetCanSpawn that sets it to true after x seconds
 	public async void SetCanSpawn() {
-		await ToSignal(GetTree().CreateTimer(spawnDelay), "timeout");
+		await ToSignal(GetTree().CreateTimer(2), "timeout");
 		spawnDelay = spawnDelay - 0.1f;
 		spawnDelay = Mathf.Max(spawnDelay, 1);
 		canSpawn = true;
@@ -48,15 +49,15 @@ public partial class TrashSpawner : Node2D
 				//randomly set position from 0 to 500, y is yVal
 				//randomly generate 4 numbers. select between spawning at the following for x ranges:
 				//157-1013, 1686-2543, 3488-4345, 5361-6113:
-				int x = (int)GD.RandRange(0, 4);
+				int x = (int)GD.RandRange(0, 5);
 				float yVal = -200;
 				if(x == 0) {
 					prefabInstance.Position = new Vector2((float)GD.RandRange(157, 1013), yVal);
-				} else if(x == 1) {
+				} else if(x == 1 || x == 3) {
 					prefabInstance.Position = new Vector2((float)GD.RandRange(1686, 2543), yVal);
 				} else if(x == 2) {
 					prefabInstance.Position = new Vector2((float)GD.RandRange(3488, 4345), yVal);
-				} else {
+				} else if(x == 4) {
 					prefabInstance.Position = new Vector2((float)GD.RandRange(5361, 6113), yVal);
 				}
 

@@ -45,8 +45,8 @@ public partial class PunchCollider : Area2D
 					}
 					//GD.Print(direction * 500);
 					//set enemy velocity to its current self but reduce greatly
-					enemy.LinearVelocity = enemy.LinearVelocity / 2;
-					enemy.ApplyCentralImpulse(direction * 600);
+					enemy.LinearVelocity = enemy.LinearVelocity / 1.5f;
+					enemy.ApplyCentralImpulse(direction * 670);
 					SetPunching();
 					
 

@@ -16,12 +16,32 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 348.0
-offset_top = -448.0
-offset_right = 748.0
-offset_bottom = -407.48
+offset_left = 502.0
+offset_top = -581.0
+offset_right = 902.0
+offset_bottom = -540.48
 grow_vertical = 0
+scale = Vector2(2.31, 2.31)
 
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Play"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 450.0
+offset_top = -701.0
+offset_right = 850.0
+offset_bottom = -660.48
+grow_vertical = 0
+scale = Vector2(2.59, 2.59)
+
+[node name="Label" type="Label" parent="VBoxContainer3"]
+layout_mode = 2
+text = "Trash Man"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="OnPlayPressed"]

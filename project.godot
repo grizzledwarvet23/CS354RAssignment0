@@ -15,6 +15,14 @@ run/main_scene="res://MainMenu.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Singleton="*res://Singleton.cs"
+
+[display]
+
+window/stretch/aspect="expand"
+
 [dotnet]
 
 project/assembly_name="Assignment 0"

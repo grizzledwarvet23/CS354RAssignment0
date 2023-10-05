@@ -1,16 +1,18 @@
-[gd_scene load_steps=17 format=3 uid="uid://dy4x6uxl8lf57"]
+[gd_scene load_steps=22 format=3 uid="uid://dy4x6uxl8lf57"]
 
 [ext_resource type="Texture2D" uid="uid://85pwvdeeoyj2" path="res://platform1.png" id="1_rg6no"]
 [ext_resource type="Script" path="res://CharacterBody2D.cs" id="2_mxam3"]
 [ext_resource type="Script" path="res://PunchCollider.cs" id="3_564ig"]
-[ext_resource type="Texture2D" uid="uid://cc34dwi4ttqb5" path="res://trashman.png" id="3_yxn6d"]
+[ext_resource type="Texture2D" uid="uid://52etpxcbo20w" path="res://trashmen_frames.png" id="3_wduom"]
 [ext_resource type="Texture2D" uid="uid://0oo4xbsbr3bw" path="res://brawlhalla.jpg" id="5_b6qdf"]
 [ext_resource type="Texture2D" uid="uid://dosqc1ewk17b7" path="res://hand.png" id="5_t0s18"]
 [ext_resource type="AudioStream" uid="uid://dd3j2nocmnh0w" path="res://whoosh.mp3" id="6_ss6gg"]
 [ext_resource type="Script" path="res://TrashBin.cs" id="8_pjjqy"]
 [ext_resource type="Script" path="res://UpdateScore.cs" id="9_l88me"]
+[ext_resource type="Script" path="res://Timer.cs" id="10_xynb0"]
 [ext_resource type="AudioStream" uid="uid://6gc4wg6xpsyh" path="res://flappy_bird.mp3" id="11_bsh1s"]
 [ext_resource type="Script" path="res://TrashSpawner.cs" id="12_2qtix"]
+[ext_resource type="AudioStream" uid="uid://b0dnr1ebkj70i" path="res://game_theme.mp3" id="12_a8s7k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6o824"]
 size = Vector2(23.2258, 24.0513)
@@ -20,6 +22,43 @@ radius = 279.71
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h5fqy"]
 size = Vector2(181, 182)
+
+[sub_resource type="Animation" id="Animation_8ukrc"]
+resource_name = "Player"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_6bavf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gotpl"]
+_data = {
+"Player": SubResource("Animation_8ukrc"),
+"RESET": SubResource("Animation_6bavf")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_51mk3"]
 size = Vector2(143.429, 43.2377)
@@ -52,8 +91,9 @@ script = ExtResource("2_mxam3")
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 position = Vector2(8.92, -31.08)
 scale = Vector2(1.39, 1.39)
-texture = ExtResource("3_yxn6d")
+texture = ExtResource("3_wduom")
 flip_h = true
+hframes = 2
 
 [node name="SubViewport" type="SubViewport" parent="Player/Sprite2D"]
 
@@ -89,7 +129,7 @@ position = Vector2(171, 174)
 zoom = Vector2(0.7, 0.7)
 limit_left = -110
 limit_top = -200
-limit_right = 5000
+limit_right = 6500
 limit_bottom = 630
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
@@ -97,6 +137,19 @@ drag_vertical_offset = 0.95
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("6_ss6gg")
+
+[node name="BGMusic" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(-402, -229)
+stream = ExtResource("12_a8s7k")
+volume_db = -16.063
+autoplay = true
+max_distance = 50000.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+speed_scale = 2.5
+libraries = {
+"": SubResource("AnimationLibrary_gotpl")
+}
 
 [node name="Backgrounds" type="Node2D" parent="."]
 position = Vector2(-917, -1509)
@@ -359,6 +412,16 @@ text = "Score: 0"
 horizontal_alignment = 2
 script = ExtResource("9_l88me")
 
+[node name="Label2" type="Label" parent="CanvasLayer"]
+modulate = Color(0, 0, 0, 1)
+offset_left = 29.0
+offset_top = 8.0
+offset_right = 211.0
+offset_bottom = 98.0
+theme_override_font_sizes/font_size = 41
+text = "Time: 90"
+script = ExtResource("10_xynb0")
+
 [node name="OneWayPlatform" type="StaticBody2D" parent="."]
 position = Vector2(1355, 304)
 scale = Vector2(3.289, 0.293)
@@ -420,6 +483,7 @@ shape = SubResource("RectangleShape2D_51mk3")
 position = Vector2(0, -34.2213)
 scale = Vector2(0.142857, 0.204918)
 stream = ExtResource("11_bsh1s")
+max_distance = 20000.0
 
 [node name="ColorTint" type="Sprite2D" parent="Bin1"]
 modulate = Color(0.905882, 0, 0, 0.654902)
@@ -444,6 +508,7 @@ shape = SubResource("RectangleShape2D_51mk3")
 position = Vector2(0, -34.2213)
 scale = Vector2(0.142857, 0.204918)
 stream = ExtResource("11_bsh1s")
+max_distance = 20000.0
 
 [node name="ColorTint" type="Sprite2D" parent="Bin2"]
 modulate = Color(0, 0, 1, 0.654902)
@@ -469,6 +534,7 @@ shape = SubResource("RectangleShape2D_51mk3")
 position = Vector2(0, -34.2213)
 scale = Vector2(0.142857, 0.204918)
 stream = ExtResource("11_bsh1s")
+max_distance = 20000.0
 
 [node name="ColorTint" type="Sprite2D" parent="Bin3"]
 modulate = Color(0, 1, 0, 0.654902)
